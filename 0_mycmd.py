@@ -7,6 +7,10 @@ class MyCmd(cmd.Cmd):
     def do_hello(self, arg):
         print("Hello this is your cmd : ")
 
+    def do_quit(self, arg):
+        print("Goodbuy..")
+        return True
+
 
 if __name__ == "__main__":
     MyCmd().cmdloop()
