@@ -7,7 +7,10 @@ class MyCmd(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_hello(self, arg):
-        print("this is your cmd : ")
+        print("Hello, this is your cmd")
+
+    def do_greet(self, arg):
+        print("Greetings... ")
 
     def do_quit(self, arg):
         return True
@@ -53,8 +56,9 @@ class MyCmd(cmd.Cmd):
 
 if __name__ == "__main__":
     mycmd = MyCmd()
-    if not sys.stdin.isatty():
-        for line in sys.stdin:
-            mycmd.onecmd(line.strip())
+    if len(sys.argv) > 1:
+        for arg in sys.argv[1:]:
+            mycmd.onecmd(arg)
+
     else:
         mycmd.cmdloop()
