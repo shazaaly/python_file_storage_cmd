@@ -30,6 +30,9 @@ class MyCmd(cmd.Cmd):
         print("Exiting...")
         return
 
+    def do_EOF(self, line):
+        return True
+
     def postcmd(self, stop: bool, line: str) -> bool:
 
         if line.strip() == "quit":
