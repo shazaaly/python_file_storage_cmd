@@ -9,7 +9,6 @@ class MyCmd(cmd.Cmd):
         print("this is your cmd : ")
 
     def do_quit(self, arg):
-        print("Goodbuy..")
         return True
 
     def emptyline(self):
@@ -23,7 +22,7 @@ class MyCmd(cmd.Cmd):
         completions = [cmd for cmd in commands if cmd.startswith(text)]
         return completions
 
-    def precmd(self, line: str):
+    # def precmd(self, line: str):
         print("Validate command...")
         return line
 
@@ -33,8 +32,8 @@ class MyCmd(cmd.Cmd):
 
     def postcmd(self, stop: bool, line: str) -> bool:
 
-        if line.strip() == "exit":
-            print(" postcmd checks for exit..")
+        if line.strip() == "quit":
+            print("$")
             return True
         return stop
 
