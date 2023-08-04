@@ -1,4 +1,5 @@
 import cmd
+import sys
 from typing import Any
 
 
@@ -18,8 +19,10 @@ class MyCmd(cmd.Cmd):
         print(f"this is an unknown command: {line}")
 
     def completedefault(self, text, line, begidx, endidx):
-        commands = ["get", "mycommand"]
-        completions = [cmd for cmd in commands if cmd.startswith(text)]
+        if not text:
+            completions = self.FRIENDS[:]
+
+        completions = [f for f in self.FRIENDS if f.startswith(text)]
         return completions
 
     # def precmd(self, line: str):
@@ -49,4 +52,9 @@ class MyCmd(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    MyCmd().cmdloop()
+    mycmd = MyCmd()
+    if not sys.stdin.isatty():
+        for line in sys.stdin:
+            mycmd.onecmd(line.strip())
+    else:
+        mycmd.cmdloop()
