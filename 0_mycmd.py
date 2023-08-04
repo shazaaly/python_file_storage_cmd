@@ -27,6 +27,24 @@ class MyCmd(cmd.Cmd):
         print("Validate command...")
         return line
 
+    def do_exit(self, arg):
+        print("Exiting...")
+        return
+
+    def postcmd(self, stop: bool, line: str) -> bool:
+
+        if line.strip() == "exit":
+            print(" postcmd checks for exit..")
+            return True
+        return stop
+
+    def preloop(self) -> None:
+        print("Documented commands (type help <topic>):")
+        print("========================================")
+        print("EOF help quit")
+        print("		")
+        print("		")
+
 
 if __name__ == "__main__":
     MyCmd().cmdloop()
