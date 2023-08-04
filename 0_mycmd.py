@@ -1,11 +1,12 @@
 import cmd
+from typing import Any
 
 
 class MyCmd(cmd.Cmd):
     prompt = "(hbnb) "
 
     def do_hello(self, arg):
-        print("Hello this is your cmd : ")
+        print("this is your cmd : ")
 
     def do_quit(self, arg):
         print("Goodbuy..")
@@ -16,6 +17,15 @@ class MyCmd(cmd.Cmd):
 
     def default(self, line):
         print(f"this is an unknown command: {line}")
+
+    def completedefault(self, text, line, begidx, endidx):
+        commands = ["get", "mycommand"]
+        completions = [cmd for cmd in commands if cmd.startswith(text)]
+        return completions
+
+    def precmd(self, line: str):
+        print("Validate command...")
+        return line
 
 
 if __name__ == "__main__":
