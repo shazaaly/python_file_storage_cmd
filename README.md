@@ -1,4 +1,5 @@
 Python Topics
+
 This repository contains code examples for learning Python topics like serialization, file storage, cmd, and OOP.
 
 Serialization
