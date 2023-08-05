@@ -1,0 +1,8 @@
+    if not sys.stdin.isatty():
+        lines = sys.stdin.read().splitlines()
+        for line in lines:
+            print("(hbnb)")
+            mycmd.onecmd(line)
+        print("(hbnb)")
+        print("$")
+        sys.exit()

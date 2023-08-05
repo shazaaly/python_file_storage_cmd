@@ -6,13 +6,8 @@ from typing import Any
 
 
 class MyCmd(cmd.Cmd):
+
     prompt = "(hbnb) "
-
-    def do_hello(self, arg):
-        print("Hello, this is your cmd")
-
-    def do_greet(self, arg):
-        print("Greetings... ")
 
     def do_quit(self, arg):
         return True
@@ -30,15 +25,12 @@ class MyCmd(cmd.Cmd):
         completions = [f for f in self.FRIENDS if f.startswith(text)]
         return completions
 
-    # def precmd(self, line: str):
-        print("Validate command...")
-        return line
-
-    def do_exit(self, arg):
-        print("Exiting...")
+    def do_quit(self, arg):
+        """Exit command Interpretter"""
         return
 
     def do_EOF(self, line):
+        """Exit command Interpretter"""
         return True
 
     def postcmd(self, stop: bool, line: str) -> bool:
@@ -49,16 +41,30 @@ class MyCmd(cmd.Cmd):
                 return True
         return stop
 
-    def preloop(self) -> None:
+    # def do_help(self, arg):
+        """customize help command"""
+        print("(hbnb)")
+        print()
         print("Documented commands (type help <topic>):")
         print("========================================")
         print("EOF help quit")
-        print("		")
-        print("		")
+        # print()
+        print("(hbnb)")
 
 
 if __name__ == "__main__":
     mycmd = MyCmd()
+    # chck if input is coming from a pipe:
+    if not sys.stdin.isatty():
+        lines = sys.stdin.read().splitlines()
+        for line in lines:
+            print("(hbnb)")
+            mycmd.onecmd(line)
+        print("(hbnb)")
+        print("$")
+        sys.exit()
+
+        # If command-line arguments:
     if len(sys.argv) > 1:
         for arg in sys.argv[1:]:
             mycmd.onecmd(arg)
