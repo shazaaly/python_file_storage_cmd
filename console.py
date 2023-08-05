@@ -43,9 +43,10 @@ class MyCmd(cmd.Cmd):
 
     def postcmd(self, stop: bool, line: str) -> bool:
 
-        if line.strip() == "quit":
-            print("$")
-            return True
+        if not stop:
+            if line.strip() == "quit":
+                print("$")
+                return True
         return stop
 
     def preloop(self) -> None:
