@@ -37,6 +37,7 @@ class BaseModel:
     def to_dict(self):
         """ returns a dictionary of keys/values of __dict__ of the instance:
                 """
+
         obj_dict = self.__dict__
         class_name = self.__class__.__name__
         obj_dict['__class__'] = class_name
