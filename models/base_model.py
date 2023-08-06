@@ -1,4 +1,4 @@
-#!/usr/env/python3
+#!/usr/bin/python3
 """this module is the base class of all models. It contains common elements
 """
 import uuid
@@ -9,16 +9,16 @@ class BaseModel:
     """A class to be used as base class to rest of models
     """
 
-    def __init__(self, id, created_at, updated_at) -> None:
+    def __init__(self, id=None, created_at=None, updated_at=None) -> None:
         """Constructor to initialize Public instance attributes in need at base
                 Args:
                         id (_type_): uuidv4
                         created_at (_type_): datetime
                         updated_at (_type_): datetime
         """
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        self.id = id or str(uuid.uuid4())
+        self.created_at = created_at or datetime.now()
+        self.updated_at = updated_at or datetime.now()
 
     def __str__(self) -> str:
         """function returns string representatoin of BaseModel objects
@@ -26,7 +26,7 @@ class BaseModel:
                 Returns:
                         str: prints: [<class name>] (<self.id>) <self.__dict__>
         """
-        class_name = self.__class__.name
+        class_name = self.__class__.__name__
         return f"[{class_name}] ({self.id}) {self.__dict__}"
 
     def save(self):
@@ -39,6 +39,5 @@ class BaseModel:
                 """
 
         obj_dict = self.__dict__
-        class_name = self.__class__.__name__
-        obj_dict['__class__'] = class_name
+        obj_dict['__class__'] = self.__class__.__name__
         return obj_dict
