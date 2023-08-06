@@ -16,8 +16,8 @@ class TestBaseInstantation(unittest.TestCase):
 
     It checks the following aspects of the BaseModel instance:
     1. 'id': Checks if the 'id' attribute is a valid UUID.
-    2. 'created_at' and 'updated_at': Checks if both attributes are datetime objects.
-    3. Timestamp comparison: Verifies that 'created_at' is earlier than 'updated_at'.
+    2. 'created_at' and 'updated_at': Checks if boths are datetime objects.
+    3. Timestamp comparison: Verifies 'created_at' is earlier than 'updated_at'
 
     """
 
