@@ -3,7 +3,7 @@
 to a JSON file and deserializes JSON file to instances
 """
 import json
-from models.base_model import to_dict
+from models.base_model import BaseModel
 
 
 class FileStorage():
@@ -11,7 +11,7 @@ class FileStorage():
         instances to a JSON file and deserializes
         JSON file to instances
     """
-    __file_path = ""  # string - path to the JSON file (ex: file.json)
+    __file_path = "file.json"  # string - path to the JSON file (ex: file.json)
     __objects = {}  # dictionary, empty will store \
     # all objects <class name>.id\ example BaseModel.12121212
 
@@ -32,7 +32,7 @@ class FileStorage():
             data[key] = obj_dict
 
         with open(FileStorage.__file_path, "w") as file:
-            file.write(json.dumps(data))
+            json.dump(data, file)
 
     def reload(self):
         """deserializes the JSON file to __objects \
