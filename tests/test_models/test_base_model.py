@@ -101,6 +101,13 @@ class TestBaseModel(unittest.TestCase):
         with self.assertRaises(TypeError):
             inst = BaseModel(**invalid_dict)
 
+    def test_str(self):
+        """Testing __str__ method"""
+        self.b.id = "1234"
+        strForm = self.b.__str__()
+        expected = "[BaseModel] (1234)"
+        self.assertIn(expected, strForm)
+
 
 if __name__ == '__main__':
     unittest.main()
