@@ -2,6 +2,7 @@
 # test cases for base class
 import unittest
 from models.base_model import BaseModel
+from time import sleep
 import models.base_model
 import inspect
 import datetime
@@ -107,6 +108,15 @@ class TestBaseModel(unittest.TestCase):
         strForm = self.b.__str__()
         expected = "[BaseModel] (1234)"
         self.assertIn(expected, strForm)
+
+    def test_save_updatedAt(self):
+        """test updating the public instance attribute updated_at
+            with the current datetime"""
+        new_inst = BaseModel()
+        sleep(0.05)
+        first_updated_at = new_inst.updated_at
+        new_inst.save()
+        self.assertLess(first_updated_at, new_inst.updated_at)
 
 
 if __name__ == '__main__':
