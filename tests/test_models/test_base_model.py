@@ -112,11 +112,11 @@ class TestBaseModel(unittest.TestCase):
     def test_save_updatedAt(self):
         """test updating the public instance attribute updated_at
             with the current datetime"""
-        new_inst = BaseModel()
+        new_inst = BaseModel()  # create sleep update
         sleep(0.05)
-        first_updated_at = new_inst.updated_at
+        beforeSave_updated_at = new_inst.updated_at
         new_inst.save()
-        self.assertLess(first_updated_at, new_inst.updated_at)
+        self.assertLess(beforeSave_updated_at, new_inst.updated_at)
 
 
 if __name__ == '__main__':
