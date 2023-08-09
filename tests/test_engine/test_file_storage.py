@@ -51,3 +51,12 @@ class TestFileStorage(unittest.TestCase):
         with open(json_file_path, "r") as f:
             text = f.read()
             self.assertIn("BaseModel." + base_inst.id, text)
+
+    def test_reload(self):
+        """Test Deserialization the JSON file to __objects dict"""
+        base_inst = BaseModel()
+        models.storage.new(base_inst)
+        models.storage.save()
+        models.storage.reload()
+        dict_of_obj = FileStorage._FileStorage__objects
+        self.assertIn(f"BaseModel." + base_inst.id, dict_of_obj)
