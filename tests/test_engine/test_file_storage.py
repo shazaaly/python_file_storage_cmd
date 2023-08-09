@@ -34,3 +34,7 @@ class TestFileStorage(unittest.TestCase):
 
     def test_new(self):
         """sets in __objects the obj with key <obj class name>.id"""
+        # expect :self.__objects[obj.__class__.__name__ + "." + obj.id] = obj
+        dict_of_obj = FileStorage._FileStorage__objects
+        for key, obj in dict_of_obj.items():
+            self.assertEqual(key, f"{obj.__class__.__name__}.{obj.id}")
