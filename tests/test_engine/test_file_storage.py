@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
 import unittest
+import models
+from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import sys
 import os
@@ -38,3 +40,14 @@ class TestFileStorage(unittest.TestCase):
         dict_of_obj = FileStorage._FileStorage__objects
         for key, obj in dict_of_obj.items():
             self.assertEqual(key, f"{obj.__class__.__name__}.{obj.id}")
+
+    def test_save(self):
+        """Test serialization of __objects to the JSON file"""
+        # make new obj save it and check key presence in file read
+        base_inst = BaseModel()
+        models.storage.new(base_inst)
+        models.storage.save()
+        text = ""
+        with open(json_file_path, "r") as f:
+            text = f.read()
+            self.assertIn("BaseModel." + base_inst.id, text)
