@@ -18,3 +18,8 @@ class TestConsole(unittest.TestCase):
         """Test prompt message"""
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(HBNBCommand().onecmd("quit"))
+
+    def test_EOF(self):
+        """Test EOF functionality"""
+        with patch("sys.stdout", HBNBCommand.do_EOF) as output:
+            self.assertTrue(HBNBCommand().onecmd("EOF"))
