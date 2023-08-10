@@ -21,5 +21,10 @@ class TestConsole(unittest.TestCase):
 
     def test_EOF(self):
         """Test EOF functionality"""
-        with patch("sys.stdout", HBNBCommand.do_EOF) as output:
+        with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
+
+    def test_empty_line(self):
+        """ Test handling empty lines """
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertEqual("", output.getvalue().strip())
