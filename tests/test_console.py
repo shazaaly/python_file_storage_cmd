@@ -5,6 +5,7 @@ import unittest
 from unittest.mock import patch
 from io import StringIO
 from console import HBNBCommand
+from models import storage
 
 
 class TestConsole(unittest.TestCase):
@@ -41,3 +42,23 @@ class TestCreate(unittest.TestCase):
             expected = "** class name missing **"
             HBNBCommand().onecmd(input)
             self.assertEqual(expected, output.getvalue().strip())
+
+    def test_invalid_className(self):
+        """Test if input is not a valid class"""
+        with patch("sys.stdout", new=StringIO()) as output:
+            input = "create UnknownClass"
+            expected = "** class doesn't exist **"
+            HBNBCommand().onecmd(input)  # excute command
+            self.assertEqual(expected, output.getvalue().strip())
+
+    def test_create(self):
+        """test creating a new instance of a Class,
+        saves it (to the JSON file)"""
+        with patch("sys.stdout", new=StringIO()) as output:
+            input = "create BaseModel"  # input
+            HBNBCommand().onecmd(input)  # excute command
+            captured_id = output.getvalue().strip()
+
+            inst_key = "BaseModel.{}".format(captured_id)
+            input = "create BaseModel"
+            self.assertIn(inst_key, storage.all().keys())
