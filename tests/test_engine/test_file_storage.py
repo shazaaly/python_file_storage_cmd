@@ -59,3 +59,5 @@ class TestFileStorage(unittest.TestCase):
         models.storage.reload()
         dict_of_obj = FileStorage._FileStorage__objects
         self.assertIn(f"BaseModel." + base_inst.id, dict_of_obj)
+
+
